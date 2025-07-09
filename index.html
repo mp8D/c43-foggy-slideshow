@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Foggy Fullscreen Slideshow</title>
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background: #111;
+    }
+    body {
+      width: 100vw;
+      height: 100vh;
+    }
+    .slideshow {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      z-index: 1;
+    }
+    .slide {
+      position: absolute;
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover;
+      opacity: 0;
+      filter: blur(40px);
+      transition:
+        opacity 1.2s cubic-bezier(.4,0,.2,1),
+        filter 1.2s cubic-bezier(.4,0,.2,1);
+      will-change: opacity, filter;
+    }
+    .slide.active {
+      opacity: 1;
+      filter: blur(0px);
+      z-index: 2;
+      transition:
+        opacity 1.2s cubic-bezier(.4,0,.2,1),
+        filter 2.4s cubic-bezier(.4,0,.2,1);
+    }
+  </style>
+</head>
+<body>
+  <div class="slideshow">
+    <img class="slide active" src="https://drive.google.com/uc?export=view&id=1FIITTNnnYb3baCKRpgLSofaXbA52aC3e" alt="Photo 1">
+    <img class="slide" src="https://drive.google.com/uc?export=view&id=1F9P4V57DP1Ni6nqGIGbAWuC8N83RmCt5" alt="Photo 2">
+    <img class="slide" src="https://drive.google.com/uc?export=view&id=1BYNuMLMCwiApt5z22H8AE6JktlUT-kMo" alt="Photo 3">
+    <img class="slide" src="https://drive.google.com/uc?export=view&id=1i0EBlqd8A58lI6coMYMItcDCqxpFBceR" alt="Photo 4">
+    <img class="slide" src="https://drive.google.com/uc?export=view&id=1ZtKHfrNz_LgiIStJR52OAOdQkxNBiElZ" alt="Photo 5">
+    <img class="slide" src="https://drive.google.com/uc?export=view&id=10NGgGpvBJORuYOERhQ0LJUk4Gbt0_7QY" alt="Photo 6">
+  </div>
+  <script>
+    const slides = document.querySelectorAll('.slide');
+    let current = 0;
+    setInterval(() => {
+      slides[current].classList.remove('active');
+      current = (current + 1) % slides.length;
+      slides[current].classList.add('active');
+    }, 4000); // 4 seconds per slide
+  </script>
+</body>
+</html>
